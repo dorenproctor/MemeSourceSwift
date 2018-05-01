@@ -27,7 +27,7 @@ struct CommentInfo: Codable {
         case downvotes
         case upvoters
         case downvoters
-        case id
+        case id = "_id"
     }
     
     init(from decoder: Decoder) throws {

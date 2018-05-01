@@ -135,7 +135,11 @@
                                             <segue destination="Yh0-Ox-2I9" kind="show" identifier="CommentsViewController" id="ctC-Xq-Ly6"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Return" width="100" id="9j3-Ak-6yh"/>
+                                    <barButtonItem title="Return" width="100" id="9j3-Ak-6yh">
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="wTp-I7-BWb"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="👍🏻" width="100" id="6hw-zV-4Xf" userLabel="👍🏻">
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
@@ -232,6 +236,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="ctC-Xq-Ly6"/>
         <segue reference="5lu-67-qJ3"/>
+        <segue reference="wTp-I7-BWb"/>
     </inferredMetricsTieBreakers>
 </document>

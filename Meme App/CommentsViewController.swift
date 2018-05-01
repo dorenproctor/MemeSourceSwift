@@ -16,6 +16,7 @@ class CommentsViewController: UIViewController {
     @IBAction func sendComment(_ sender: Any) {
         print(textField.text)
     }
+    var imageData: UIImage?
     
     
     func getCommentInfo(num: Int, completion: @escaping (Array<CommentInfo>?) -> Void) {
@@ -37,6 +38,13 @@ class CommentsViewController: UIViewController {
             }
         }
         task.resume()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? SingleImageViewController {
+            destinationViewController.currentNumber = self.currentNumber
+            destinationViewController.imageData = self.imageData
+        }
     }
     
     override func viewDidLoad() {

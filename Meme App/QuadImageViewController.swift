@@ -16,7 +16,7 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var image4: UIImageView!
     @IBOutlet var images: [UIImageView]!
     
-    var currentNumber = 1
+    var currentNumber = 0
     var currentImage: UIImage?
     
     func getImage(image: UIImageView, num: Int) {

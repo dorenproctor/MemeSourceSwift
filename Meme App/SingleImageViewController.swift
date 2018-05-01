@@ -122,9 +122,6 @@ class SingleImageViewController: UIViewController {
         getImage(image: image, num: self.currentNumber)
     }
     
-    @IBAction func returnButtonClicked(_ sender: Any) {
-        performSegue(withIdentifier: "QuadImageViewController", sender: sender)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? QuadImageViewController {
@@ -132,6 +129,7 @@ class SingleImageViewController: UIViewController {
         }
         if let destinationViewController = segue.destination as? CommentsViewController {
             destinationViewController.currentNumber = self.currentNumber
+            destinationViewController.imageData = self.imageData
         }
     }
     
