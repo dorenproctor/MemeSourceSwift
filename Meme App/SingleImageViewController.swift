@@ -28,7 +28,7 @@ class SingleImageViewController: UIViewController {
         let task = URLSession.shared.dataTask(with: request) {
             (data, response, error) in
             if (error != nil) {
-                print("error: ",error)
+                print("error: ",error!)
             } else {
                 self.likedImage = !self.likedImage
                 if (self.likedImage) {
