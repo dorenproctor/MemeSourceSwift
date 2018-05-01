@@ -11,41 +11,115 @@ import UIKit
 class SingleImageViewController: UIViewController {
     
     @IBOutlet var image: UIImageView!
+    @IBOutlet var upvoteButton: UIBarButtonItem!
+    var user = "someUsername"
+    var likedImage = false
     var imageData: UIImage?
     var currentNumber = 0
+    @IBAction func commentsButton(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "CommentsViewController", sender: sender)
+    }
+    
+    @IBAction func upvote(_ sender: UIBarButtonItem) {
+        let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/upvoteImage/"+user+"/"+String(currentNumber)
+        let url = URL(string: string)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            if (error != nil) {
+                print("error: ",error)
+            } else {
+                self.likedImage = !self.likedImage
+                if (self.likedImage) {
+                    print("You upvoted the image")
+                    sender.title = "👍"
+                } else {
+                    print("Upvote removed")
+                    sender.title = "👍🏻"
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func getImageInfo(num: Int) {
+        fetchImageInfo(num: num) { (imageInfo) in
+            if let imageInfo = imageInfo {
+                if imageInfo.upvoters.contains(self.user) {
+                    print("You have upvoted this in the past")
+                    self.upvoteButton.title = "👍"
+                } else {
+                    print("You have not upvoted this before")
+                    self.upvoteButton.title = "👍🏻"
+                }
+            }
+        }
+    }
+    
+    
+    func fetchImageInfo(num: Int, completion: @escaping (ImageInfo?) -> Void) {
+        let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/imageInfo/"+String(num)
+        let url = URL(string: string)!
+        let task = URLSession.shared.dataTask(with: url) { (data,
+            response, error) in
+            let jsonDecoder = JSONDecoder()
+            if let data = data {
+                if let imageInfo = try?
+                    jsonDecoder.decode(ImageInfo.self, from: data) {
+                    completion(imageInfo)
+                } else {
+                    let alert = UIAlertController(title: "Data was not serialized.", message: String(data: data, encoding: .utf8), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .`default`, handler: { _ in
+                    }))
+                    UIApplication.shared.windows[0].rootViewController?.present(alert, animated: true, completion: nil)
+                    completion(nil)
+                }
+            } else {
+                print("No data was returned.")
+                let alert = UIAlertController(title: "No data was returned.", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .`default`, handler: { _ in
+                }))
+                UIApplication.shared.windows[0].rootViewController?.present(alert, animated: true, completion: nil)
+                completion(nil)
+            }
+        }
+        task.resume()
+    }
+    
     
     func getImage(image: UIImageView, num: Int) {
         do {
-            let string = "https://dorenproctor.000webhostapp.com/memes/"+String(num)+".jpg"
+            let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/getImage/"+String(num)
             let url = URL(string: string)
             let data = try Data(contentsOf: url!)
             image.image = UIImage(data: data)
         } catch {
             print("image ",String(num),": ",error)
+            image.image = nil
         }
     }
     
-    @IBAction func nextButton(_ sender: UIButton) {
+    
+    @IBAction func nextButton(_ sender: UIBarButtonItem) {
         nextImage()
-        print("a")
     }
-    @IBAction func prevButton(_ sender: UIButton) {
+    @IBAction func prevButton(_ sender: UIBarButtonItem) {
         prevImage()
-        print("b")
     }
     
     @objc func nextImage() {
         self.currentNumber += 1
-        let n = self.currentNumber
-        getImage(image: image, num: n)
+        getImageInfo(num: self.currentNumber)
+        getImage(image: image, num: self.currentNumber)
     }
     
     @objc func prevImage() {
         if self.currentNumber > 0 {
             self.currentNumber -= 1
         }
-        let n = self.currentNumber
-        getImage(image: image, num: n)
+        getImageInfo(num: self.currentNumber)
+        getImage(image: image, num: self.currentNumber)
     }
     
     @IBAction func returnButtonClicked(_ sender: Any) {
@@ -56,11 +130,15 @@ class SingleImageViewController: UIViewController {
         if let destinationViewController = segue.destination as? QuadImageViewController {
             destinationViewController.currentNumber = self.currentNumber
         }
+        if let destinationViewController = segue.destination as? CommentsViewController {
+            destinationViewController.currentNumber = self.currentNumber
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         image.image = imageData
+        getImageInfo(num: currentNumber)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -71,5 +149,3 @@ class SingleImageViewController: UIViewController {
     
     
 }
-
-

@@ -21,7 +21,7 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func getImage(image: UIImageView, num: Int) {
         do {
-            let string = "https://dorenproctor.000webhostapp.com/memes/"+String(num)+".jpg"
+            let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/getImage/"+String(num)
             let url = URL(string: string)
             let data = try Data(contentsOf: url!)
             image.image = UIImage(data: data)
@@ -31,13 +31,11 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @IBAction func nextButton(_ sender: UIButton) {
+    @IBAction func nextButton(_ sender: UIBarButtonItem) {
         nextImages()
-        print("a")
     }
-    @IBAction func prevButton(_ sender: UIButton) {
+    @IBAction func prevButton(_ sender: UIBarButtonItem) {
         prevImages()
-        print("b")
     }
     
     @objc func nextImages() {

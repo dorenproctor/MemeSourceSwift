@@ -51,28 +51,15 @@
                                     <constraint firstAttribute="height" constant="50" id="WVd-sh-Bpv"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem width="100" style="plain" id="67C-x0-Shf" userLabel="&lt;">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="f1O-hL-AN6" userLabel="prevButton">
-                                            <rect key="frame" x="16" y="10" width="30" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="&lt;"/>
-                                            <connections>
-                                                <action selector="prevButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jtg-IZ-K58"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem title="&lt;" width="100" id="Y73-EU-kde" userLabel="&lt;">
+                                        <connections>
+                                            <action selector="prevButton:" destination="BYZ-38-t0r" id="c3U-dK-23B"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem width="300" id="zEk-Cd-8JK" userLabel="Space 1"/>
-                                    <barButtonItem width="100" style="plain" id="AbQ-SE-jiX" userLabel="&gt;">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BsM-my-Cmc" userLabel="nextButton">
-                                            <rect key="frame" x="329" y="10" width="30" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="&gt;"/>
-                                            <connections>
-                                                <action selector="nextButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q5c-JQ-I7P"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem title="&gt;" width="100" id="Rp9-s2-zwa">
                                         <connections>
-                                            <action selector="a:" destination="BYZ-38-t0r" id="VDX-Ir-3rB"/>
+                                            <action selector="nextButton:" destination="BYZ-38-t0r" id="p0D-Dj-dDd"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -138,32 +125,27 @@
                                     <constraint firstAttribute="height" constant="50" id="nOf-dn-lYg"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="&lt;" width="100" style="plain" id="CuO-J3-cbB" userLabel="&lt;">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kqt-4A-fZl" userLabel="prevButton">
-                                            <rect key="frame" x="16" y="10" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="&lt;"/>
-                                            <connections>
-                                                <action selector="prevButton:" destination="qWa-SG-OF4" eventType="touchUpInside" id="cbv-Ud-fuo"/>
-                                            </connections>
-                                        </button>
-                                    </barButtonItem>
-                                    <barButtonItem width="100" id="G1Y-XR-x0v" userLabel="Space 1"/>
-                                    <barButtonItem title="Return" width="100" id="9j3-Ak-6yh">
+                                    <barButtonItem title="&lt;" width="100" id="sIq-N7-L0o">
                                         <connections>
-                                            <action selector="returnButtonClicked:" destination="qWa-SG-OF4" id="1eV-tK-VmE"/>
+                                            <action selector="prevButton:" destination="qWa-SG-OF4" id="NG4-xx-YfI"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="100" id="6hw-zV-4Xf" userLabel="Space 2"/>
-                                    <barButtonItem title="&gt;" width="100" style="plain" id="ZF0-DB-h4j" userLabel="&gt;">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3ew-YE-HWE" userLabel="nextButton">
-                                            <rect key="frame" x="313" y="10" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="&gt;"/>
-                                            <connections>
-                                                <action selector="nextButton:" destination="qWa-SG-OF4" eventType="touchUpInside" id="k69-ix-GgN"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem title="Comments" width="100" id="G1Y-XR-x0v">
+                                        <connections>
+                                            <segue destination="Yh0-Ox-2I9" kind="show" identifier="CommentsViewController" id="ctC-Xq-Ly6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Return" width="100" id="9j3-Ak-6yh"/>
+                                    <barButtonItem title="👍🏻" width="100" id="6hw-zV-4Xf" userLabel="👍🏻">
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="upvote:" destination="qWa-SG-OF4" id="0JO-wr-Ulg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="&gt;" width="100" id="2Pb-6g-9qO">
+                                        <connections>
+                                            <action selector="nextButton:" destination="qWa-SG-OF4" id="imj-y2-XLV"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -185,6 +167,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="image" destination="k47-3F-rYJ" id="Zl0-EL-QaW"/>
+                        <outlet property="upvoteButton" destination="6hw-zV-4Xf" id="IB5-XR-TIO"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="QuadImageViewController" id="zj0-GT-HiH"/>
                     </connections>
                 </viewController>
@@ -195,16 +178,60 @@
         <!--CommentsViewController-->
         <scene sceneID="Hwf-tB-jbs">
             <objects>
-                <viewController id="Yh0-Ox-2I9" userLabel="CommentsViewController" sceneMemberID="viewController">
+                <viewController id="Yh0-Ox-2I9" userLabel="CommentsViewController" customClass="CommentsViewController" customModule="Meme_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c9a-tH-blW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNT-up-3bS">
+                                <rect key="frame" x="164" y="41" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Return"/>
+                                <connections>
+                                    <segue destination="qWa-SG-OF4" kind="show" id="5lu-67-qJ3"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="efW-h5-3Ne" userLabel="Entry Box">
+                                <rect key="frame" x="0.0" y="573" width="325" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Flp-B5-mku"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94Z-gA-ABG" userLabel="Send">
+                                <rect key="frame" x="325" y="617" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="JoC-dg-eRL"/>
+                                    <constraint firstAttribute="height" constant="50" id="gNd-Ae-vWX"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="sendComment:" destination="Yh0-Ox-2I9" eventType="touchUpInside" id="Jib-cQ-w0U"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="94Z-gA-ABG" secondAttribute="trailing" id="YRs-eh-IBS"/>
+                            <constraint firstAttribute="bottom" secondItem="94Z-gA-ABG" secondAttribute="bottom" id="bK8-Da-Igm"/>
+                            <constraint firstItem="efW-h5-3Ne" firstAttribute="bottom" secondItem="1ix-ti-Dai" secondAttribute="bottom" id="n0Q-EQ-UwI"/>
+                            <constraint firstItem="efW-h5-3Ne" firstAttribute="leading" secondItem="1ix-ti-Dai" secondAttribute="leading" id="sJd-In-g1q"/>
+                            <constraint firstItem="94Z-gA-ABG" firstAttribute="leading" secondItem="efW-h5-3Ne" secondAttribute="trailing" id="zTh-6i-gHZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1ix-ti-Dai"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="efW-h5-3Ne" id="lry-xH-H2A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LaS-1B-rTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1805.5999999999999" y="117.39130434782609"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5lu-67-qJ3"/>
+    </inferredMetricsTieBreakers>
 </document>

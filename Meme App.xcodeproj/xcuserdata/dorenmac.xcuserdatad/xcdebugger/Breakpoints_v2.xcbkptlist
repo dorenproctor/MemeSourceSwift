@@ -2,4 +2,99 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meme App/CommentsViewController.swift"
+            timestampString = "546851526.962095"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "CommentsViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meme_App.CommentsViewController.__deallocating_deinit"
+                  moduleName = "Meme App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dorenmac/Desktop/MemeApp/Meme%20App/CommentsViewController.swift"
+                  timestampString = "545894167.569783"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meme_App.CommentsViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Meme_App.CommentsViewController"
+                  moduleName = "Meme App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dorenmac/Desktop/MemeApp/Meme%20App/CommentsViewController.swift"
+                  timestampString = "545894167.5793101"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meme_App.CommentsViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Meme_App.CommentsViewController"
+                  moduleName = "Meme App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dorenmac/Desktop/MemeApp/Meme%20App/CommentsViewController.swift"
+                  timestampString = "545894167.587131"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "77">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meme_App.CommentsViewController.__allocating_init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Meme_App.CommentsViewController&gt;"
+                  moduleName = "Meme App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dorenmac/Desktop/MemeApp/Meme%20App/CommentsViewController.swift"
+                  timestampString = "545894167.595289"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meme_App.CommentsViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;Meme_App.CommentsViewController&gt;"
+                  moduleName = "Meme App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dorenmac/Desktop/MemeApp/Meme%20App/CommentsViewController.swift"
+                  timestampString = "545894167.605201"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "46">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
