@@ -64,7 +64,6 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
         let tapSelector : Selector = #selector(QuadImageViewController.Tap)
         let tapGesture = UITapGestureRecognizer(target: self, action: tapSelector)
         image.addGestureRecognizer(tapGesture)
-        
     }
     
     @objc func Tap(_ sender: UITapGestureRecognizer) {

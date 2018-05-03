@@ -290,6 +290,7 @@
         <image name="Submit Image" width="310" height="163"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="6fu-y1-FRF"/>
         <segue reference="cEO-HB-UZE"/>
         <segue reference="zj0-GT-HiH"/>
     </inferredMetricsTieBreakers>

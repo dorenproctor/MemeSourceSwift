@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SingleImageViewController: UIViewController {
+class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var image: UIImageView!
     @IBOutlet var upvoteButton: UIButton!
@@ -188,6 +188,14 @@ class SingleImageViewController: UIViewController {
         super.viewDidLoad()
         image.image = imageData
         getImageInfo(num: currentNumber)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(nextImage))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(prevImage))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
