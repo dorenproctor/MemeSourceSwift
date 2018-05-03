@@ -12,8 +12,10 @@ class SingleImageViewController: UIViewController {
     
     @IBOutlet var image: UIImageView!
     @IBOutlet var upvoteButton: UIBarButtonItem!
+    @IBOutlet var downvoteButton: UIBarButtonItem!
     var user = "someUsername"
     var likedImage = false
+    var dislikedImage = false
     var imageData: UIImage?
     var currentNumber = 0
     @IBAction func commentsButton(_ sender: UIBarButtonItem) {
@@ -35,9 +37,37 @@ class SingleImageViewController: UIViewController {
                     if (self.likedImage) {
                         print("You upvoted the image")
                         sender.title = "👍"
+                        self.dislikedImage = false
+                        self.downvoteButton.title = "👎🏻"
                     } else {
                         print("Upvote removed")
                         sender.title = "👍🏻"
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    @IBAction func downvote(_ sender: UIBarButtonItem) {
+        let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/downImage/"+user+"/"+String(currentNumber)
+        let url = URL(string: string)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            if (error != nil) {
+                print("error: ",error!)
+            } else {
+                DispatchQueue.main.async() {
+                    self.dislikedImage = !self.dislikedImage
+                    if (self.dislikedImage) {
+                        print("You downvoted the image")
+                        sender.title = "👎"
+                        self.likedImage = false
+                        self.upvoteButton.title = "👍🏻"
+                    } else {
+                        print("downvote removed")
+                        sender.title = "👎🏻"
                     }
                 }
             }
@@ -48,12 +78,26 @@ class SingleImageViewController: UIViewController {
     func getImageInfo(num: Int) {
         fetchImageInfo(num: num) { (imageInfo) in
             if let imageInfo = imageInfo {
-                if imageInfo.upvoters.contains(self.user) {
-                    print("You have upvoted this in the past")
-                    self.upvoteButton.title = "👍"
-                } else {
-                    print("You have not upvoted this before")
-                    self.upvoteButton.title = "👍🏻"
+                DispatchQueue.main.async() {
+                    if imageInfo.upvoters.contains(self.user) {
+                        print("You have upvoted this in the past")
+                        self.upvoteButton.title = "👍"
+                        self.likedImage = true
+                    } else {
+                        print("You have not upvoted this before")
+                        self.upvoteButton.title = "👍🏻"
+                        self.likedImage = false
+                    }
+                    
+                    if imageInfo.downvoters.contains(self.user) {
+                        print("You have downvoted this in the past")
+                        self.downvoteButton.title = "👎"
+                        self.dislikedImage = true
+                    } else {
+                        print("You have not downvoted this before")
+                        self.downvoteButton.title = "👎🏻"
+                        self.dislikedImage = false
+                    }
                 }
             }
         }
