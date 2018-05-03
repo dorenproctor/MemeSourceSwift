@@ -30,13 +30,15 @@ class SingleImageViewController: UIViewController {
             if (error != nil) {
                 print("error: ",error!)
             } else {
-                self.likedImage = !self.likedImage
-                if (self.likedImage) {
-                    print("You upvoted the image")
-                    sender.title = "👍"
-                } else {
-                    print("Upvote removed")
-                    sender.title = "👍🏻"
+                DispatchQueue.main.async() {
+                    self.likedImage = !self.likedImage
+                    if (self.likedImage) {
+                        print("You upvoted the image")
+                        sender.title = "👍"
+                    } else {
+                        print("Upvote removed")
+                        sender.title = "👍🏻"
+                    }
                 }
             }
         }

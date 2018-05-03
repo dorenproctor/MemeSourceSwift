@@ -187,14 +187,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNT-up-3bS">
-                                <rect key="frame" x="164" y="41" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNT-up-3bS">
+                                <rect key="frame" x="0.0" y="20" width="375" height="30"/>
                                 <state key="normal" title="Return"/>
                                 <connections>
                                     <segue destination="qWa-SG-OF4" kind="show" id="5lu-67-qJ3"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="G6Q-Dk-ojh" userLabel="Comment Box">
+                                <rect key="frame" x="0.0" y="50" width="375" height="523"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a comment" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="efW-h5-3Ne" userLabel="Entry Box">
                                 <rect key="frame" x="0.0" y="573" width="325" height="50"/>
                                 <constraints>
@@ -218,15 +223,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="1ix-ti-Dai" firstAttribute="trailing" secondItem="CNT-up-3bS" secondAttribute="trailing" id="CW1-Bu-OQZ"/>
+                            <constraint firstItem="efW-h5-3Ne" firstAttribute="top" secondItem="G6Q-Dk-ojh" secondAttribute="bottom" id="F5D-YB-tij"/>
+                            <constraint firstItem="1ix-ti-Dai" firstAttribute="trailing" secondItem="G6Q-Dk-ojh" secondAttribute="trailing" id="Opm-kv-Fr6"/>
+                            <constraint firstItem="G6Q-Dk-ojh" firstAttribute="leading" secondItem="1ix-ti-Dai" secondAttribute="leading" id="TEZ-D7-qsh"/>
+                            <constraint firstItem="CNT-up-3bS" firstAttribute="leading" secondItem="1ix-ti-Dai" secondAttribute="leading" id="WoY-o0-97T"/>
                             <constraint firstAttribute="trailing" secondItem="94Z-gA-ABG" secondAttribute="trailing" id="YRs-eh-IBS"/>
                             <constraint firstAttribute="bottom" secondItem="94Z-gA-ABG" secondAttribute="bottom" id="bK8-Da-Igm"/>
                             <constraint firstItem="efW-h5-3Ne" firstAttribute="bottom" secondItem="1ix-ti-Dai" secondAttribute="bottom" id="n0Q-EQ-UwI"/>
+                            <constraint firstItem="G6Q-Dk-ojh" firstAttribute="top" secondItem="CNT-up-3bS" secondAttribute="bottom" id="sBu-ch-MlG"/>
                             <constraint firstItem="efW-h5-3Ne" firstAttribute="leading" secondItem="1ix-ti-Dai" secondAttribute="leading" id="sJd-In-g1q"/>
+                            <constraint firstItem="CNT-up-3bS" firstAttribute="top" secondItem="1ix-ti-Dai" secondAttribute="top" id="xqV-QZ-Vp1"/>
                             <constraint firstItem="94Z-gA-ABG" firstAttribute="leading" secondItem="efW-h5-3Ne" secondAttribute="trailing" id="zTh-6i-gHZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1ix-ti-Dai"/>
                     </view>
                     <connections>
+                        <outlet property="commentBox" destination="G6Q-Dk-ojh" id="ZiM-Ua-Npu"/>
                         <outlet property="textField" destination="efW-h5-3Ne" id="lry-xH-H2A"/>
                     </connections>
                 </viewController>

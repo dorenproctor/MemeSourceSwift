@@ -9,7 +9,7 @@
 import UIKit
 
 struct CommentPostInfo: Codable {
-    var imageId: Int
+    var imageId: String
     var content: String
     var user: String
 }
@@ -17,6 +17,7 @@ struct CommentPostInfo: Codable {
 class CommentsViewController: UIViewController {
     
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet var commentBox: UITextView!
     var currentNumber = 0
     var imageData: UIImage?
     var user = "someUsername"
@@ -26,7 +27,7 @@ class CommentsViewController: UIViewController {
             return
         }
         print(textField.text!)
-        let post = CommentPostInfo(imageId: currentNumber, content: textField.text!, user: user)
+        let post = CommentPostInfo(imageId: String(currentNumber), content: textField.text!, user: user)
         postComment(post: post) { (error) in
             if let error = error {
                 print(error)
@@ -63,6 +64,13 @@ class CommentsViewController: UIViewController {
             
             if let data = data, let utf8Representation = String(data: data, encoding: .utf8) {
                 print("response: ", utf8Representation)
+                if (utf8Representation.range(of:"\"statusCode\":200") != nil) {
+                    DispatchQueue.main.async() {
+                        let string = self.user + ":  " + post.content + "\n\n\n"
+                        self.commentBox.text = self.commentBox.text + string
+                    }
+                }
+                
             } else {
                 print("no readable data received in response")
             }
@@ -100,13 +108,15 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print(currentNumber)
         getCommentInfo(num: currentNumber) { (commentInfo) in
             if let commentInfo = commentInfo {
-                print(commentInfo)
-                print("~~~~~")
-                for comment in commentInfo {
-                    print(comment.content)
+                DispatchQueue.main.async() {
+                    for comment in commentInfo {
+                        let string = comment.user + ":  " + comment.content + "\n\n\n"
+                        self.commentBox.text = self.commentBox.text + string
+                    }
                 }
             } else {
                 print("error")
