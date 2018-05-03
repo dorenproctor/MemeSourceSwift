@@ -11,18 +11,18 @@ import UIKit
 class SingleImageViewController: UIViewController {
     
     @IBOutlet var image: UIImageView!
-    @IBOutlet var upvoteButton: UIBarButtonItem!
-    @IBOutlet var downvoteButton: UIBarButtonItem!
+    @IBOutlet var upvoteButton: UIButton!
+    @IBOutlet var downvoteButton: UIButton!
     var user = "someUsername"
     var likedImage = false
     var dislikedImage = false
     var imageData: UIImage?
     var currentNumber = 0
-    @IBAction func commentsButton(_ sender: UIBarButtonItem) {
+    @IBAction func commentsButton(_ sender: UIButton) {
         performSegue(withIdentifier: "CommentsViewController", sender: sender)
     }
     
-    @IBAction func upvote(_ sender: UIBarButtonItem) {
+    @IBAction func upvote(_ sender: UIButton) {
         let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/upvoteImage/"+user+"/"+String(currentNumber)
         let url = URL(string: string)!
         var request = URLRequest(url: url)
@@ -35,20 +35,20 @@ class SingleImageViewController: UIViewController {
                 DispatchQueue.main.async() {
                     self.likedImage = !self.likedImage
                     if (self.likedImage) {
-                        print("You upvoted the image")
-                        sender.title = "👍"
+//                        print("You upvoted the image")
+                        self.upvoteButton.setTitle("👍", for: .normal)
+                        self.downvoteButton.setTitle("👎🏻", for: .normal)
                         self.dislikedImage = false
-                        self.downvoteButton.title = "👎🏻"
                     } else {
-                        print("Upvote removed")
-                        sender.title = "👍🏻"
+//                        print("Upvote removed")
+                        self.upvoteButton.setTitle("👍🏻", for: .normal)
                     }
                 }
             }
         }
         task.resume()
     }
-    @IBAction func downvote(_ sender: UIBarButtonItem) {
+    @IBAction func downvote(_ sender: UIButton) {
         let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/downImage/"+user+"/"+String(currentNumber)
         let url = URL(string: string)!
         var request = URLRequest(url: url)
@@ -61,13 +61,13 @@ class SingleImageViewController: UIViewController {
                 DispatchQueue.main.async() {
                     self.dislikedImage = !self.dislikedImage
                     if (self.dislikedImage) {
-                        print("You downvoted the image")
-                        sender.title = "👎"
+//                        print("You downvoted the image")
+                        self.downvoteButton.setTitle("👎", for: .normal)
+                        self.upvoteButton.setTitle("👍🏻", for: .normal)
                         self.likedImage = false
-                        self.upvoteButton.title = "👍🏻"
                     } else {
-                        print("downvote removed")
-                        sender.title = "👎🏻"
+//                        print("downvote removed")
+                        self.downvoteButton.setTitle("👎🏻", for: .normal)
                     }
                 }
             }
@@ -80,22 +80,18 @@ class SingleImageViewController: UIViewController {
             if let imageInfo = imageInfo {
                 DispatchQueue.main.async() {
                     if imageInfo.upvoters.contains(self.user) {
-                        print("You have upvoted this in the past")
-                        self.upvoteButton.title = "👍"
+                        self.upvoteButton.setTitle("👍", for: .normal)
                         self.likedImage = true
                     } else {
-                        print("You have not upvoted this before")
-                        self.upvoteButton.title = "👍🏻"
+                        self.upvoteButton.setTitle("👍🏻", for: .normal)
                         self.likedImage = false
                     }
                     
                     if imageInfo.downvoters.contains(self.user) {
-                        print("You have downvoted this in the past")
-                        self.downvoteButton.title = "👎"
+                        self.downvoteButton.setTitle("👎", for: .normal)
                         self.dislikedImage = true
                     } else {
-                        print("You have not downvoted this before")
-                        self.downvoteButton.title = "👎🏻"
+                        self.downvoteButton.setTitle("👎🏻", for: .normal)
                         self.dislikedImage = false
                     }
                 }
@@ -147,10 +143,10 @@ class SingleImageViewController: UIViewController {
     }
     
     
-    @IBAction func nextButton(_ sender: UIBarButtonItem) {
+    @IBAction func nextButton(_ sender: UIButton) {
         nextImage()
     }
-    @IBAction func prevButton(_ sender: UIBarButtonItem) {
+    @IBAction func prevButton(_ sender: UIButton) {
         prevImage()
     }
     

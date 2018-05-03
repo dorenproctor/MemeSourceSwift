@@ -26,7 +26,6 @@ class CommentsViewController: UIViewController {
         if (textField.text == nil || textField.text!.isEmpty){
             return
         }
-        print(textField.text!)
         let post = CommentPostInfo(imageId: String(currentNumber), content: textField.text!, user: user)
         postComment(post: post) { (error) in
             if let error = error {
@@ -49,7 +48,7 @@ class CommentsViewController: UIViewController {
         do {
             let jsonData = try encoder.encode(post)
             request.httpBody = jsonData
-            print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
+//            print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
         } catch {
             completion?(error)
         }
@@ -63,12 +62,14 @@ class CommentsViewController: UIViewController {
 //            }
             
             if let data = data, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("response: ", utf8Representation)
                 if (utf8Representation.range(of:"\"statusCode\":200") != nil) {
                     DispatchQueue.main.async() {
                         let string = self.user + ":  " + post.content + "\n\n\n"
                         self.commentBox.text = self.commentBox.text + string
                     }
+                }
+                else {
+                    print(utf8Representation)
                 }
                 
             } else {
@@ -85,7 +86,6 @@ class CommentsViewController: UIViewController {
             response, error) in
             let jsonDecoder = JSONDecoder()
             if let data = data {
-//                print(data)
                 if let commentInfo = try?
                     jsonDecoder.decode(Array<CommentInfo>.self, from: data) {
                     completion(commentInfo)
@@ -108,13 +108,11 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(currentNumber)
         getCommentInfo(num: currentNumber) { (commentInfo) in
             if let commentInfo = commentInfo {
                 DispatchQueue.main.async() {
                     for comment in commentInfo {
-                        let string = comment.user + ":  " + comment.content + "\n\n\n"
+                        let string = comment.user + ":\n" + comment.content + "\n\n\n"
                         self.commentBox.text = self.commentBox.text + string
                     }
                 }

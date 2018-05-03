@@ -117,10 +117,10 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="yjd-mz-kIN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="553"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="509"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k47-3F-rYJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="553"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -131,63 +131,80 @@
                                     <constraint firstAttribute="trailing" secondItem="k47-3F-rYJ" secondAttribute="trailing" id="w9J-kS-oNO"/>
                                 </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMB-x0-ETH">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gF9-eb-Fd8">
+                                <rect key="frame" x="0.0" y="573" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ath-DG-f6x" userLabel="&lt;">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="&lt;">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="prevButton:" destination="qWa-SG-OF4" eventType="touchUpInside" id="xL2-RQ-zhL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qal-2a-bku" userLabel="👎🏻">
+                                        <rect key="frame" x="75" y="0.0" width="75" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="👎🏻"/>
+                                        <connections>
+                                            <action selector="downvote:" destination="qWa-SG-OF4" eventType="touchUpInside" id="FpV-2t-dIr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S60-f7-k33" userLabel="💬">
+                                        <rect key="frame" x="150" y="0.0" width="75" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="💬"/>
+                                        <connections>
+                                            <segue destination="Yh0-Ox-2I9" kind="show" id="6fu-y1-FRF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl3-gF-QFS" userLabel="👍🏻">
+                                        <rect key="frame" x="225" y="0.0" width="75" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="👍🏻"/>
+                                        <connections>
+                                            <action selector="upvote:" destination="qWa-SG-OF4" eventType="touchUpInside" id="aBa-hS-xro"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jQP-6Y-1UC" userLabel="&gt;">
+                                        <rect key="frame" x="300" y="0.0" width="75" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="&gt;">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButton:" destination="qWa-SG-OF4" eventType="touchUpInside" id="eK1-iU-UQM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="nOf-dn-lYg"/>
+                                    <constraint firstAttribute="height" constant="50" id="uHh-U3-SLV"/>
                                 </constraints>
-                                <items>
-                                    <barButtonItem title="&lt;" width="100" id="sIq-N7-L0o">
-                                        <connections>
-                                            <action selector="prevButton:" destination="qWa-SG-OF4" id="NG4-xx-YfI"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="👎🏻" width="100" id="9j3-Ak-6yh" userLabel="👎🏻">
-                                        <connections>
-                                            <action selector="downvote:" destination="qWa-SG-OF4" id="paE-We-zcX"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="💬" width="100" id="G1Y-XR-x0v" userLabel="💬">
-                                        <connections>
-                                            <segue destination="Yh0-Ox-2I9" kind="show" identifier="CommentsViewController" id="ctC-Xq-Ly6"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="👍🏻" width="100" id="6hw-zV-4Xf" userLabel="👍🏻">
-                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <action selector="upvote:" destination="qWa-SG-OF4" id="0JO-wr-Ulg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="&gt;" width="100" id="2Pb-6g-9qO">
-                                        <connections>
-                                            <action selector="nextButton:" destination="qWa-SG-OF4" id="imj-y2-XLV"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </toolbar>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="EMB-x0-ETH" secondAttribute="trailing" id="19D-JB-7Kv"/>
                             <constraint firstItem="rOM-zu-Li2" firstAttribute="top" secondItem="NEa-Yi-Z20" secondAttribute="top" id="5Vu-aa-p3T"/>
+                            <constraint firstItem="NEa-Yi-Z20" firstAttribute="trailing" secondItem="gF9-eb-Fd8" secondAttribute="trailing" id="8ch-TZ-bop"/>
                             <constraint firstItem="rOM-zu-Li2" firstAttribute="trailing" secondItem="NEa-Yi-Z20" secondAttribute="trailing" id="Bhq-xC-bnf"/>
                             <constraint firstItem="yjd-mz-kIN" firstAttribute="leading" secondItem="NEa-Yi-Z20" secondAttribute="leading" id="IGC-iD-1RB"/>
                             <constraint firstItem="rOM-zu-Li2" firstAttribute="leading" secondItem="NEa-Yi-Z20" secondAttribute="leading" id="Pdt-vP-PBF"/>
                             <constraint firstItem="NEa-Yi-Z20" firstAttribute="trailing" secondItem="yjd-mz-kIN" secondAttribute="trailing" id="X3A-mx-bFb"/>
                             <constraint firstItem="yjd-mz-kIN" firstAttribute="top" secondItem="rOM-zu-Li2" secondAttribute="bottom" id="ezK-wR-zuU"/>
-                            <constraint firstAttribute="bottom" secondItem="EMB-x0-ETH" secondAttribute="bottom" id="kQP-jZ-yWf"/>
-                            <constraint firstItem="EMB-x0-ETH" firstAttribute="leading" secondItem="8xu-7Z-wli" secondAttribute="leading" id="lGr-gh-TQd"/>
-                            <constraint firstItem="EMB-x0-ETH" firstAttribute="top" secondItem="yjd-mz-kIN" secondAttribute="bottom" id="qnh-3u-ter"/>
+                            <constraint firstItem="gF9-eb-Fd8" firstAttribute="top" secondItem="yjd-mz-kIN" secondAttribute="bottom" id="gTO-aP-jcw"/>
+                            <constraint firstItem="NEa-Yi-Z20" firstAttribute="bottom" secondItem="gF9-eb-Fd8" secondAttribute="bottom" id="kzq-1A-kNI"/>
+                            <constraint firstItem="gF9-eb-Fd8" firstAttribute="leading" secondItem="NEa-Yi-Z20" secondAttribute="leading" id="tRv-dK-9Jn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NEa-Yi-Z20"/>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="downvoteButton" destination="9j3-Ak-6yh" id="jAr-PU-Vgs"/>
+                        <outlet property="downvoteButton" destination="qal-2a-bku" id="vun-Yj-6k2"/>
                         <outlet property="image" destination="k47-3F-rYJ" id="Zl0-EL-QaW"/>
-                        <outlet property="upvoteButton" destination="6hw-zV-4Xf" id="IB5-XR-TIO"/>
+                        <outlet property="upvoteButton" destination="jl3-gF-QFS" id="f43-C3-wFD"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="QuadImageViewController" id="zj0-GT-HiH"/>
                     </connections>
                 </viewController>
@@ -230,13 +247,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94Z-gA-ABG" userLabel="Send">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94Z-gA-ABG" userLabel="Submit Comment">
                                 <rect key="frame" x="325" y="617" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="JoC-dg-eRL"/>
                                     <constraint firstAttribute="height" constant="50" id="gNd-Ae-vWX"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" backgroundImage="Submit Image"/>
                                 <connections>
                                     <action selector="sendComment:" destination="Yh0-Ox-2I9" eventType="touchUpInside" id="Jib-cQ-w0U"/>
                                 </connections>
@@ -269,8 +286,10 @@
             <point key="canvasLocation" x="1805.5999999999999" y="117.39130434782609"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Submit Image" width="310" height="163"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ctC-Xq-Ly6"/>
         <segue reference="cEO-HB-UZE"/>
         <segue reference="zj0-GT-HiH"/>
     </inferredMetricsTieBreakers>
