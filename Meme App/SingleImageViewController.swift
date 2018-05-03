@@ -17,6 +17,7 @@ class SingleImageViewController: UIViewController {
     var likedImage = false
     var dislikedImage = false
     var imageData: UIImage?
+    var imageInfo: ImageInfo?
     var currentNumber = 0
     @IBAction func commentsButton(_ sender: UIButton) {
         performSegue(withIdentifier: "CommentsViewController", sender: sender)
@@ -35,13 +36,16 @@ class SingleImageViewController: UIViewController {
                 DispatchQueue.main.async() {
                     self.likedImage = !self.likedImage
                     if (self.likedImage) {
-//                        print("You upvoted the image")
                         self.upvoteButton.setTitle("👍", for: .normal)
                         self.downvoteButton.setTitle("👎🏻", for: .normal)
-                        self.dislikedImage = false
+                        self.imageInfo?.upvotes += 1
+                        if (self.dislikedImage) {
+                            self.imageInfo?.downvotes -= 1
+                            self.dislikedImage = false
+                        }
                     } else {
-//                        print("Upvote removed")
                         self.upvoteButton.setTitle("👍🏻", for: .normal)
+                        self.imageInfo?.upvotes -= 1
                     }
                 }
             }
@@ -49,7 +53,7 @@ class SingleImageViewController: UIViewController {
         task.resume()
     }
     @IBAction func downvote(_ sender: UIButton) {
-        let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/downImage/"+user+"/"+String(currentNumber)
+        let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/downvoteImage/"+user+"/"+String(currentNumber)
         let url = URL(string: string)!
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
@@ -61,13 +65,16 @@ class SingleImageViewController: UIViewController {
                 DispatchQueue.main.async() {
                     self.dislikedImage = !self.dislikedImage
                     if (self.dislikedImage) {
-//                        print("You downvoted the image")
                         self.downvoteButton.setTitle("👎", for: .normal)
                         self.upvoteButton.setTitle("👍🏻", for: .normal)
-                        self.likedImage = false
+                        self.imageInfo?.downvotes += 1
+                        if (self.likedImage) {
+                            self.imageInfo?.upvotes -= 1
+                            self.likedImage = false
+                        }
                     } else {
-//                        print("downvote removed")
                         self.downvoteButton.setTitle("👎🏻", for: .normal)
+                        self.imageInfo?.downvotes -= 1
                     }
                 }
             }
@@ -78,6 +85,7 @@ class SingleImageViewController: UIViewController {
     func getImageInfo(num: Int) {
         fetchImageInfo(num: num) { (imageInfo) in
             if let imageInfo = imageInfo {
+                self.imageInfo = imageInfo
                 DispatchQueue.main.async() {
                     if imageInfo.upvoters.contains(self.user) {
                         self.upvoteButton.setTitle("👍", for: .normal)
@@ -172,6 +180,7 @@ class SingleImageViewController: UIViewController {
         if let destinationViewController = segue.destination as? CommentsViewController {
             destinationViewController.currentNumber = self.currentNumber
             destinationViewController.imageData = self.imageData
+            destinationViewController.imageInfo = self.imageInfo
         }
     }
     

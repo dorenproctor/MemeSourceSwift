@@ -21,6 +21,7 @@ class CommentsViewController: UIViewController {
     var currentNumber = 0
     var imageData: UIImage?
     var user = "someUsername"
+    var imageInfo: ImageInfo?
     
     @IBAction func sendComment(_ sender: Any) {
         if (textField.text == nil || textField.text!.isEmpty){
@@ -108,6 +109,10 @@ class CommentsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let imageInfo = self.imageInfo {
+            let votesString = "upvotes: " + String(describing: imageInfo.upvotes) + "  downvotes: " + String(describing: imageInfo.downvotes) + "\n\n\n"
+            self.commentBox.text = self.commentBox.text + votesString
+        }
         getCommentInfo(num: currentNumber) { (commentInfo) in
             if let commentInfo = commentInfo {
                 DispatchQueue.main.async() {
