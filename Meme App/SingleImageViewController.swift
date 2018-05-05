@@ -13,17 +13,27 @@ class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var image: UIImageView!
     @IBOutlet var upvoteButton: UIButton!
     @IBOutlet var downvoteButton: UIButton!
-    var user = "someUsername"
-    var likedImage = false
-    var dislikedImage = false
+    @IBOutlet var signInButton: UIBarButtonItem!
+    
+    var currentNumber = 0
     var imageData: UIImage?
     var imageInfo: ImageInfo?
-    var currentNumber = 0
+    var user = ""
+    
+    var likedImage = false
+    var dislikedImage = false
     @IBAction func commentsButton(_ sender: UIButton) {
         performSegue(withIdentifier: "CommentsViewController", sender: sender)
     }
     
     @IBAction func upvote(_ sender: UIButton) {
+        if (user.isEmpty) {
+            let alert = UIAlertController(title: "You must be signed in to vote", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Primary action"), style: .`default`, handler: { _ in
+            }))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/upvoteImage/"+user+"/"+String(currentNumber)
         let url = URL(string: string)!
         var request = URLRequest(url: url)
@@ -53,6 +63,13 @@ class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
         task.resume()
     }
     @IBAction func downvote(_ sender: UIButton) {
+        if (user.isEmpty) {
+            let alert = UIAlertController(title: "You must be signed in to vote", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Primary action"), style: .`default`, handler: { _ in
+            }))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         let string = "http://ec2-18-188-44-41.us-east-2.compute.amazonaws.com/downvoteImage/"+user+"/"+String(currentNumber)
         let url = URL(string: string)!
         var request = URLRequest(url: url)
@@ -176,11 +193,19 @@ class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? QuadImageViewController {
             destinationViewController.currentNumber = self.currentNumber
+            destinationViewController.user = self.user
         }
         if let destinationViewController = segue.destination as? CommentsViewController {
             destinationViewController.currentNumber = self.currentNumber
-            destinationViewController.imageData = self.imageData
             destinationViewController.imageInfo = self.imageInfo
+            destinationViewController.imageData = self.imageData
+            destinationViewController.user = self.user
+        }
+        if let destinationViewController = segue.destination as? SignInViewController {
+            destinationViewController.currentNumber = self.currentNumber
+            destinationViewController.imageInfo = self.imageInfo
+            destinationViewController.imageData = self.imageData
+            destinationViewController.user = self.user
         }
     }
     
@@ -188,6 +213,9 @@ class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         image.image = imageData
         getImageInfo(num: currentNumber)
+        if (!user.isEmpty) {
+            signInButton.title = user
+        }
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(nextImage))
         swipeLeft.direction = .left
@@ -204,5 +232,10 @@ class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let defaults = UserDefaults.standard
+        defaults.set(user, forKey: "user")
+        defaults.set(currentNumber, forKey: "currentNumber")
+    }
 }

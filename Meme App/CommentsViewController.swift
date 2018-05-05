@@ -18,13 +18,21 @@ class CommentsViewController: UIViewController {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet var commentBox: UITextView!
+    
     var currentNumber = 0
     var imageData: UIImage?
-    var user = "someUsername"
     var imageInfo: ImageInfo?
+    var user = ""
     
     @IBAction func sendComment(_ sender: Any) {
         if (textField.text == nil || textField.text!.isEmpty){
+            return
+        }
+        if (user.isEmpty) {
+            let alert = UIAlertController(title: "You must be signed in to comment", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Primary action"), style: .`default`, handler: { _ in
+            }))
+            self.present(alert, animated: true, completion: nil)
             return
         }
         let post = CommentPostInfo(imageId: String(currentNumber), content: textField.text!, user: user)
@@ -103,7 +111,9 @@ class CommentsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? SingleImageViewController {
             destinationViewController.currentNumber = self.currentNumber
+            destinationViewController.imageInfo = self.imageInfo
             destinationViewController.imageData = self.imageData
+            destinationViewController.user = self.user
         }
     }
     
@@ -125,6 +135,13 @@ class CommentsViewController: UIViewController {
                 print("error")
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let defaults = UserDefaults.standard
+        defaults.set(user, forKey: "user")
+        defaults.set(currentNumber, forKey: "currentNumber")
     }
     
     

@@ -16,8 +16,10 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet var image4: UIImageView!
     @IBOutlet var images: [UIImageView]!
     
+    
     var currentNumber = 0
     var currentImage: UIImage?
+    var user = ""
     
     func getImage(image: UIImageView, num: Int) {
         do {
@@ -98,6 +100,7 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? SingleImageViewController {
+            destinationViewController.user = self.user
             destinationViewController.imageData = self.currentImage
             if self.currentNumber > 1 {
                 destinationViewController.currentNumber = self.currentNumber - 1
@@ -105,6 +108,13 @@ class QuadImageViewController: UIViewController, UIGestureRecognizerDelegate {
                 destinationViewController.currentNumber = self.currentNumber
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let defaults = UserDefaults.standard
+        defaults.set(user, forKey: "user")
+        defaults.set(currentNumber, forKey: "currentNumber")
     }
     
     override func didReceiveMemoryWarning() {
