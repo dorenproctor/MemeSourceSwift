@@ -22,8 +22,9 @@ class SignInViewController: UIViewController {
     
     var currentNumber = 0
     var imageData: UIImage?
-    var imageInfo: ImageInfo?
     var user = ""
+    
+    var userChanged = false
     
     @IBAction func signIn(_ sender: Any) {
         if (usernameBox.text == nil || usernameBox.text!.isEmpty || passwordBox.text == nil || passwordBox.text!.isEmpty){
@@ -114,7 +115,6 @@ class SignInViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? SingleImageViewController {
             destinationViewController.currentNumber = self.currentNumber
-            destinationViewController.imageInfo = self.imageInfo
             destinationViewController.imageData = self.imageData
             destinationViewController.user = self.user
         }

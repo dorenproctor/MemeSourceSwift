@@ -203,7 +203,6 @@ class SingleImageViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         if let destinationViewController = segue.destination as? SignInViewController {
             destinationViewController.currentNumber = self.currentNumber
-            destinationViewController.imageInfo = self.imageInfo
             destinationViewController.imageData = self.imageData
             destinationViewController.user = self.user
         }
